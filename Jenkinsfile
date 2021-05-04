@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build'){
       steps{
-        sh "mvn install"
+        sh "sudo mvn clean install -DskipTests=true"
       }
     }
   }
