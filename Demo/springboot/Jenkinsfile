@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Build'){
       steps{
-        sh "sudo mvn install -DskipTests=true"
+        sh "mvn install -DskipTests=true"
       }
     }
   }
