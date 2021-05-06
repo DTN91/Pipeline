@@ -3,7 +3,6 @@ pipeline {
   stages {
     stage('clean') {
       steps{
-        sh "git clone https://github.com/DTN91/Pipeline.git"
         sh "mvn clean"
       }
     }
