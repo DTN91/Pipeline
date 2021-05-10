@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    PATH = "/opt/maven381/bin/:$PATH"
+  }
   stages {
     stage('clean') {
       steps{
