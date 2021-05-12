@@ -1,0 +1,25 @@
+pipeline {
+  agent any
+  node {
+    def artifactServer = Artifactory.server SERVER_ID
+    def artifactbuildInfo = Artifactory.newBuildInfo()
+    def artifactbuildMaven = Artifactory.newMavenBuild()
+    artifactbuildMaven.tool = 'MVN381'
+  }
+  environment {
+    PATH = "/opt/maven381/bin/:$PATH"
+  }
+  stages {
+    stage('clean') {
+      steps{
+        git "https://github.com/DTN91/Pipeline"
+        sh "mvn clean"
+      }
+    }
+    stage('Build'){
+      steps{
+        sh "mvn install -DskipTests=true"
+      }
+    }
+  }
+}
