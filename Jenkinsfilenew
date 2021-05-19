@@ -6,30 +6,30 @@ pipeline {
     def artifactbuildMaven = Artifactory.newMavenBuild()
     artifactbuildMaven.tool = 'MVN363'
   
-  environment {
-    PATH = "/Users/c831380/apache-maven-3.6.3/bin/:$PATH"
-  }
-  stages {
-    stage('clean') {
-      steps{
-        git "https://github.com/DTN91/Pipeline"
-        sh "mvn clean"
-        artifactbuildMaven.deployer releaseRepo:'Pipeline', server: artifactServer
-        artifactbuildMaven.deployer.deployArtifacts = false
-        artifactbuildInfo.env.capture = true
+    environment {
+      PATH = "/Users/c831380/apache-maven-3.6.3/bin/:$PATH"
+    }
+    stages {
+      stage('clean') {
+        steps{
+          git "https://github.com/DTN91/Pipeline"
+          sh "mvn clean"
+          artifactbuildMaven.deployer releaseRepo:'Pipeline', server: artifactServer
+          artifactbuildMaven.deployer.deployArtifacts = false
+          artifactbuildInfo.env.capture = true
+        }
+      }
+      stage('Build'){
+        steps{
+          sh "mvn install -DskipTests=true"
+        }
+      }
+      stage('Upload to Artifactory'){
+        steps{
+          artifactbuildMaven.deployer.deployArtifacts artifactbuildInfo
+          artifactServer.publishBuildInfo artifactbuildInfo
+        }
       }
     }
-    stage('Build'){
-      steps{
-        sh "mvn install -DskipTests=true"
-      }
-    }
-    stage('Upload to Artifactory'){
-      steps{
-        artifactbuildMaven.deployer.deployArtifacts artifactbuildInfo
-        artifactServer.publishBuildInfo artifactbuildInfo
-      }
-    }
-  }
   }
 }
