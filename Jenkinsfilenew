@@ -4,10 +4,10 @@ pipeline {
     def artifactServer = Artifactory.server jfrogserver
     def artifactbuildInfo = Artifactory.newBuildInfo()
     def artifactbuildMaven = Artifactory.newMavenBuild()
-    artifactbuildMaven.tool = 'MVN381'
+    artifactbuildMaven.tool = 'MVN363'
   }
   environment {
-    PATH = "/opt/maven381/bin/:$PATH"
+    PATH = "/Users/c831380/apache-maven-3.6.3/bin/:$PATH"
   }
   stages {
     stage('clean') {
