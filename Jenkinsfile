@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    PATH = "/opt/maven381/bin/:$PATH"
+    PATH = "/Users/c831380/apache-maven-3.6.3/bin/:$PATH"
   }
   stages {
     stage('clean') {
