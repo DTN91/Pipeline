@@ -1,6 +1,4 @@
-pipeline {
-  agent any
-  node {
+node {
     def artifactServer = Artifactory.server jfrogserver
     def artifactbuildInfo = Artifactory.newBuildInfo()
     def artifactbuildMaven = Artifactory.newMavenBuild()
@@ -32,4 +30,4 @@ pipeline {
       }
     }
   }
-}
+
