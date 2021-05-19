@@ -8,24 +8,18 @@ node {
       PATH = "/Users/c831380/apache-maven-3.6.3/bin/:$PATH"
     }
       stage('clean') {
-        steps{
           git "https://github.com/DTN91/Pipeline"
           sh "mvn clean"
           artifactbuildMaven.deployer releaseRepo: 'Pipeline', server: artifactServer
           artifactbuildMaven.deployer.deployArtifacts = false
           artifactbuildInfo.env.capture = true
-        }
       }
       stage('Build'){
-        steps{
           sh "mvn install -DskipTests=true"
-        }
       }
       stage('Upload to Artifactory'){
-        steps{
           artifactbuildMaven.deployer.deployArtifacts artifactbuildInfo
           artifactServer.publishBuildInfo artifactbuildInfo
-        }
       }
     }
   
