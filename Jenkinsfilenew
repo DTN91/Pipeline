@@ -5,7 +5,7 @@ pipeline {
     def artifactbuildInfo = Artifactory.newBuildInfo()
     def artifactbuildMaven = Artifactory.newMavenBuild()
     artifactbuildMaven.tool = 'MVN363'
-  }
+  
   environment {
     PATH = "/Users/c831380/apache-maven-3.6.3/bin/:$PATH"
   }
@@ -30,5 +30,6 @@ pipeline {
         artifactServer.publishBuildInfo artifactbuildInfo
       }
     }
+  }
   }
 }
