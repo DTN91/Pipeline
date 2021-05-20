@@ -4,9 +4,8 @@ node {
     def artifactbuildMaven = Artifactory.newMavenBuild()
     artifactbuildMaven.tool = 'MVN363'
   
-    environment {
-      PATH = "/Users/c831380/apache-maven-3.6.3/bin/:$PATH"
-    }
+    env.PATH = "/Users/c831380/apache-maven-3.6.3/bin/:${env.PATH}"
+    
     stage('clean') {
           git "https://github.com/DTN91/Pipeline"
           sh "mvn clean"
